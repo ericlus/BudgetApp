@@ -1,7 +1,5 @@
 const db = require("..");
 
-//{name:"Weekly",startDate:new Date(Date.now()),endDate:(new Date(Dat
-//  e.now() + 604800000)), expIncome: 1000}
 exports.create = ({ name, startDate, endDate, expIncome, user }) => {
   let prepared = `INSERT INTO budgets (name, start_date, end_date, expected_income, user_id) VALUES (?, ?, ?, ?, ?)`;
   let values = [name, startDate, endDate, expIncome, user];
@@ -31,7 +29,7 @@ exports.delete = ({ id }) => {
 };
 
 exports.retrieve = () => {
-  let prepared = `SELECT * FROM budgets`;
+  let prepared = `SELECT * FROM budgets ORDER BY id DESC;`;
   return new Promise((resolve, reject) => {
     db.query(prepared, (err, results, fields) => {
       if (err) {

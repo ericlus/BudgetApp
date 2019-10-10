@@ -38,7 +38,6 @@ exports.update = (req, res) => {
 
 exports.retrieve = (req, res) => {
   let { budgetId } = req.params;
-  console.log(budgetId);
   BudgetLine.retrieve(budgetId)
     .then(rows => res.status(200).send(rows))
     .catch(err => {

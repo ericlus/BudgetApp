@@ -51,9 +51,17 @@ class App extends React.Component {
       .post("/budget", { startDate, endDate, name, expIncome })
       .then(({ data }) => {
         this.setState({
-          view: "SPECIFIC_BUDGET",
+          view: "ALL_BUDGETS",
           specificBudget: data
         });
+      })
+      .then(() => {
+        axios
+          .get("/budget")
+          .then(({ data }) => {
+            this.setState({ budgets: data });
+          })
+          .catch(console.error);
       })
       .catch(console.error);
   }
